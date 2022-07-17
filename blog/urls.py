@@ -14,8 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from posts.views import index
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+   path('admin/', admin.site.urls),
+   path('', include('new_application.urls')),
+   path('', index, name='index'), # как правильно прописывать маршруты
+                                 # если работает два приложения на одном порту?
 ]
+

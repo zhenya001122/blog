@@ -5,9 +5,9 @@ from django.http import HttpResponse
 logger = logging.getLogger(__name__)
 
 def home(request):
-    logger.error("Test!!")
+    logger.error("Запрошена главная страница")
     return HttpResponse('Главная')
 
 def about(request):
-    logger.error("Test_2!!")
+    logger.error("Запрошена страница 'Наш клуб'")
     return HttpResponse('Наш клуб')

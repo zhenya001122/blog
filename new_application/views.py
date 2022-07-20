@@ -18,6 +18,6 @@ def users(request):
         id = request.GET.get("id", 1)
         name = request.GET.get("name", "Zhenya")
         output = "User id: {0}  name: {1}".format(id, name)
-    return HttpResponse(output)
+        return HttpResponse(output)
     # elif request.method == 'POST':
 

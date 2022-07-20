@@ -11,3 +11,10 @@ def home(request):
 def about(request):
     logger.error("Запрошена страница 'Наш клуб'")
     return HttpResponse('Наш клуб')
+
+def users(request):
+    logger.error("Запрошена страница 'Пользователи'")
+    id = request.GET.get("id", 1)
+    name = request.GET.get("name", "Tom")
+    output = "User id: {0}  name: {1}".format(id, name)
+    return HttpResponse(output)

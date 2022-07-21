@@ -21,7 +21,7 @@ from posts.views import index
 urlpatterns = [
    path('admin/', admin.site.urls),
    path('', include('new_application.urls')),
-   path('', index, name='index'), # как правильно прописывать маршруты
+   path('posts/', index, name='index'), # как правильно прописывать маршруты
                                  # если работает два приложения на одном порту?
 ]
 

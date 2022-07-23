@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = bool(os.environ.get('DEBUG', True))
 
 ALLOWED_HOSTS = []
 
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.environ.get('DATABASE_PATH'),
+        'NAME': os.environ.get('DATABASE_PATH', BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -146,8 +146,6 @@ LOGGING = {
 
 MY_ENV_VAR = os.environ.get('MY_ENV_VAR')
 
-AAAA = os.environ.get('AAAA')
-
-BBBB = os.environ.get('BBBB')
-
-CCCC = os.environ.get('CCCC')
+AGE = os.environ.get('AGE')
+ALLOWED = os.environ.get('ALLOWED')
+DENIED = os.environ.get('DENIED')

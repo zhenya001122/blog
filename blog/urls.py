@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from posts.views import index, post_add
 from profiles.views import profiles, register, login_view, logout_view
@@ -29,6 +29,9 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path("api/", include("api.urls", namespace="api")),
+    path('api/', include('app_users.urls')),
+    path('api/', include('app_goods.urls')),
 ]
 
 if settings.DEBUG:

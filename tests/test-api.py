@@ -21,3 +21,8 @@ class TestViews:
 
         assert response.status_code == 200
         assert len(response.data) == 5
+
+    def test_post_create(self):
+        self.client.force_login(self.user)
+        data = {'title': 'title', 'slug': 'slug', }
+        response = self.client.post('/api/posts')

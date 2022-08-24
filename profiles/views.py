@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout, login, authenticate
 
 from profiles.forms import RegisterForm, LoginForm
+from profiles.services import create_user
 
 logger = logging.getLogger(__name__)
 
@@ -20,14 +21,13 @@ def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = User(
+            create_user(
                 email=form.cleaned_data["email"],
                 username=form.cleaned_data["email"],
                 first_name=form.cleaned_data["first_name"],
                 last_name=form.cleaned_data["last_name"],
+                password=form.cleaned_data["password"]
             )
-            user.set_password(form.cleaned_data["password"])
-            user.save()
             return redirect("/")
     else:
         form = RegisterForm()

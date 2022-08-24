@@ -1,13 +1,16 @@
-import factory
-from factory.django import DjangoModelFactory
+from django.http import HttpResponse
+from django.shortcuts import render
 
-from posts.models import Post
+from shop.models import Product
+from shop.services import get_sorted_product
 
 
-class PostFactory(DjangoModelFactory):
-    class Meta:
-        model = Post
+def products(request):
+    if request.GET.get("color"):
+        product_list = Product.objects.filter(color=request.GET.get("color"))
+    else:
+        product_list = Product.objects.all()
+    order_by = request.GET.get("order_by")
 
-    title = factory.Faker("word")
-    slug = factory.Faker("word")
-    text = factory.Faker("sentence")
+    product_list = get_sorted_product(product_list, order_by)
+    return render(request, "index.html", {"product_list": product_list})

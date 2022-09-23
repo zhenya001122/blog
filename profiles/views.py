@@ -26,7 +26,7 @@ def register(request):
                 username=form.cleaned_data["email"],
                 first_name=form.cleaned_data["first_name"],
                 last_name=form.cleaned_data["last_name"],
-                password=form.cleaned_data["password"]
+                password=form.cleaned_data["password"],
             )
             return redirect("/")
     else:

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.core.cache import cache
 
 COLOR_CHOICES = (
     ("red", "Red color"),
@@ -14,10 +15,17 @@ class Product(models.Model):
         max_length=200, choices=COLOR_CHOICES, blank=True, null=True
     )
     image = models.ImageField(upload_to="products/", blank=True, null=True)
-    cost = models.IntegerField()
+    cost = models.DecimalField(decimal_places=2, max_digits=7)
+
+    external_id = models.CharField(max_length=200, blank=True, null=True)
+    link = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return f"Product: {self.title}"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        cache.delete_pattern("products-view.*")
 
 
 class Purchase(models.Model):

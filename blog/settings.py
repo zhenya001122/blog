@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-z+t4o8h(c!rar$z#80d=&8)yakq%)8ww&u6_00e-leq09bj2c)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "crispy_forms",
     "crispy_bootstrap5",
+    'django_rq',
     "posts",
     "profiles",
     "shop",
@@ -89,9 +90,28 @@ DATABASES = {
         "NAME": "django",
         "USER": "django",
         "PASSWORD": "django",
-        "HOST": "localhost",
+        "HOST": os.environ.get("DATABASE_HOST", "localhost"),
         "PORT": 5432,
     }
+}
+
+#https://docs.djangoproject.com/en/4.1/ref/settings/#caches
+
+REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
+CACHES = {
+   "default": {
+       "BACKEND": "django.core.cache.backends.redis.RedisCache",
+       "LOCATION": f"redis://{REDIS_HOST}:6379",
+   }
+}
+
+RQ_QUEUES = {
+   "default": {
+       "HOST": REDIS_HOST,
+       "PORT": 6379,
+       "DB": 0,
+       "DEFAULT_TIMEOUT": 360,
+   },
 }
 
 

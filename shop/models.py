@@ -1,11 +1,19 @@
+import requests
 from django.conf import settings
 from django.db import models
 from django.core.cache import cache
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 COLOR_CHOICES = (
     ("red", "Red color"),
     ("green", "Green color"),
     ("white", "White color"),
+)
+
+STATUS_CHOICES = (
+    ("IN_STOCK", "In Stock"),
+    ("OUT_OF_STOCK", "Out of Stock"),
 )
 
 
@@ -16,6 +24,10 @@ class Product(models.Model):
     )
     image = models.ImageField(upload_to="products/", blank=True, null=True)
     cost = models.DecimalField(decimal_places=2, max_digits=7)
+    cost_byn = models.DecimalField(decimal_places=2, max_digits=7, default=0)
+    status = models.CharField(
+        max_length=32, choices=STATUS_CHOICES, blank=True, null=True
+    )
 
     external_id = models.CharField(max_length=200, blank=True, null=True)
     link = models.CharField(max_length=200, blank=True, null=True)
@@ -26,6 +38,12 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         cache.delete_pattern("products-view.*")
+
+
+@receiver(post_save, sender=Product, dispatch_uid="send_message")
+def send_message(sender, instance, **kwargs):
+    message = f"Product {instance.title} is updated"
+    requests.get(f"http://127.0.0.1:5000/?message={message}")
 
 
 class Purchase(models.Model):

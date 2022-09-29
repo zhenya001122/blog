@@ -14,7 +14,7 @@ services:
       - POSTGRES_USER=django
       - POSTGRES_PASSWORD=django
 
-  django:
+  django: &base_container
     image: test/django-blog:latest
     ports:
       - "8000:8000"
@@ -29,14 +29,8 @@ services:
       python manage.py runserver 0.0.0.0:8000
 
   worker:
-    image: test/django-blog:latest
-    volumes:
-      - ./:/app/
-    depends_on:
-      - postgres
-      - redis
-    environment:
-      - DATABASE_HOST=postgres
-      - REDIS_HOST=redis
+    <<: *base_container
+    ports: [ ]
     command: |
       python manage.py rqworker default
+  

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "posts",
     "profiles",
     "shop",
+    'hectar',
 ]
 
 MIDDLEWARE = [
@@ -207,3 +208,5 @@ REST_FRAMEWORK = {
 }
 MY_ENV_VAR = os.environ.get('MY_ENV_VAR')
 
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")

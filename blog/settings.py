@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "crispy_forms",
     "crispy_bootstrap5",
-    'django_rq',
     "posts",
     "profiles",
     "shop",
@@ -98,25 +97,19 @@ DATABASES = {
     }
 }
 
+# postgres://isgkzwrnmbovhd:7b2f5fcbc7e8d0eb43d6d46a5ef9d0f33ac0412d0e85bce1bb4e6e62160dbafa@ec2-63-32-248-14.eu-west-1.compute.amazonaws.com:5432/dc1s395lbmt7ms
+
 
 #https://docs.djangoproject.com/en/4.1/ref/settings/#caches
 
-REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
+
 CACHES = {
-   "default": {
-       "BACKEND": "django.core.cache.backends.redis.RedisCache",
-       "LOCATION": f"redis://{REDIS_HOST}:6379",
-   }
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-snowflake",
+    }
 }
 
-RQ_QUEUES = {
-   "default": {
-       "HOST": REDIS_HOST,
-       "PORT": 6379,
-       "DB": 0,
-       "DEFAULT_TIMEOUT": 360,
-   },
-}
 
 
 # Password validation

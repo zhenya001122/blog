@@ -4,7 +4,6 @@ from scrapy import signals
 from scrapy.crawler import CrawlerProcess
 from scrapy.signalmanager import dispatcher
 from scrapy.utils.project import get_project_settings
-from django_rq import job
 
 from shop.models import Product
 from shop.spiders import OmaSpider
@@ -24,7 +23,6 @@ def get_sorted_product(queryset: QuerySet, order_by: str):
     return queryset
 
 
-@job
 def run_oma_spider(dry_run: bool = False):
     if dry_run:
         Product.objects.all().delete()

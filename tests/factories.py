@@ -1,16 +1,45 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+import factory
+import factory.fuzzy
 
-from shop.models import Product
-from shop.services import get_sorted_product
+from django.contrib.auth.models import User
+
+from factory.django import DjangoModelFactory
+
+from posts.models import Post
+from shop.models import Product, COLOR_CHOICES, Purchase
 
 
-def products(request):
-    if request.GET.get("color"):
-        product_list = Product.objects.filter(color=request.GET.get("color"))
-    else:
-        product_list = Product.objects.all()
-    order_by = request.GET.get("order_by")
+class PostFactory(DjangoModelFactory):
+    class Meta:
+        model = Post
 
-    product_list = get_sorted_product(product_list, order_by)
-    return render(request, "index.html", {"product_list": product_list})
+    title = factory.Faker("text")
+    slug = factory.Faker("word")
+    text = factory.Faker("paragraph")
+
+
+class UserFactory(DjangoModelFactory):
+    class Meta:
+        model = User
+
+    username = factory.Faker("word")
+    email = factory.Faker("email")
+    password = factory.Faker("md5")
+
+
+class ProductFactory(DjangoModelFactory):
+    class Meta:
+        model = Product
+
+    title = factory.Faker("company")
+    color = factory.fuzzy.FuzzyChoice(dict(COLOR_CHOICES).keys())
+    cost = factory.Faker("pyint", min_value=50, max_value=150)
+
+
+class PurchaseFactory(DjangoModelFactory):
+    class Meta:
+        model = Purchase
+
+    user = factory.SubFactory(UserFactory)
+    product = factory.SubFactory(ProductFactory)
+    count = factory.Faker("pyint", min_value=1, max_value=5)

@@ -35,15 +35,15 @@ class Product(models.Model):
     def __str__(self):
         return f"Product: {self.title}"
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        cache.delete_pattern("products-view.*")
-
-
-@receiver(post_save, sender=Product, dispatch_uid="send_message")
-def send_message(sender, instance, **kwargs):
-    message = f"Product {instance.title} is updated"
-    requests.get(f"http://127.0.0.1:5000/?message={message}")
+#     def save(self, *args, **kwargs):
+#         super().save(*args, **kwargs)
+#         cache.delete_pattern("products-view.*")
+#
+#
+# @receiver(post_save, sender=Product, dispatch_uid="send_message")
+# def send_message(sender, instance, **kwargs):
+#     message = f"Product {instance.title} is updated"
+#     requests.get(f"http://127.0.0.1:5000/?message={message}")
 
 
 class Purchase(models.Model):

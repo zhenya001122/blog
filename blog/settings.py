@@ -25,6 +25,8 @@ SECRET_KEY = 'django-insecure-z+t4o8h(c!rar$z#80d=&8)yakq%)8ww&u6_00e-leq09bj2c)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', True))
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost"]
+
 ALLOWED_HOSTS = ["*"]
 
 
@@ -155,13 +157,14 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "blog" / "static"]
 
-STATIC_ROOT = None
+STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "static/"
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "media/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

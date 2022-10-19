@@ -5,6 +5,7 @@ from telegram import Update, Bot
 from telegram.ext import ContextTypes
 
 from hectar.models import Message
+from shop.models import Product
 
 
 @sync_to_async
@@ -26,3 +27,4 @@ async def send_message(chat_id: int, text: str) -> None:
     bot = Bot(settings.BOT_TOKEN)
     chat_id = cache.get("chat_id")
     await bot.send_message(chat_id=chat_id, text=text)
+

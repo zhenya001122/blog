@@ -1,7 +1,7 @@
 import requests
 from django.conf import settings
-from django.db import models
 from django.core.cache import cache
+from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -34,6 +34,7 @@ class Product(models.Model):
 
     def __str__(self):
         return f"Product: {self.title}"
+
 
 #     def save(self, *args, **kwargs):
 #         super().save(*args, **kwargs)

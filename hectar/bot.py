@@ -1,7 +1,7 @@
 from django.conf import settings
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters
 
-from hectar.services import start, message
+from hectar.services import message, start
 
 
 def run_bot():

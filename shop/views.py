@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from django.core.cache import cache
 from django.core.paginator import Paginator
+from django.shortcuts import render
 
 from shop.models import Product
 from shop.services import get_sorted_product

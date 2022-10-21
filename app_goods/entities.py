@@ -6,7 +6,7 @@ class Item:
 
     def to_dict(self):
         return {
-            'name': self.name,
-            'description': self.description,
-            'weight': self.weight
+            "name": self.name,
+            "description": self.description,
+            "weight": self.weight,
         }

@@ -1,7 +1,7 @@
 from asgiref.sync import sync_to_async
 from django.conf import settings
 from django.core.cache import cache
-from telegram import Update, Bot
+from telegram import Bot, Update
 from telegram.ext import ContextTypes
 
 from hectar.models import Message
@@ -27,4 +27,3 @@ async def send_message(chat_id: int, text: str) -> None:
     bot = Bot(settings.BOT_TOKEN)
     chat_id = cache.get("chat_id")
     await bot.send_message(chat_id=chat_id, text=text)
-

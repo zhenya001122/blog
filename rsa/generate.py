@@ -2,8 +2,6 @@ import binascii
 
 from Crypto.PublicKey import RSA
 
-
-
 key_pair = RSA.generate(2048)
 
 message = "A message for encryption".encode()

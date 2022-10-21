@@ -6,18 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shop', '0004_alter_product_cost'),
+        ("shop", "0004_alter_product_cost"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='cost_byn',
+            model_name="product",
+            name="cost_byn",
             field=models.DecimalField(decimal_places=2, default=0, max_digits=7),
         ),
         migrations.AddField(
-            model_name='product',
-            name='status',
-            field=models.CharField(blank=True, choices=[('IN_STOCK', 'In Stock'), ('OUT_OF_STOCK', 'Out of Stock')], max_length=32, null=True),
+            model_name="product",
+            name="status",
+            field=models.CharField(
+                blank=True,
+                choices=[("IN_STOCK", "In Stock"), ("OUT_OF_STOCK", "Out of Stock")],
+                max_length=32,
+                null=True,
+            ),
         ),
     ]

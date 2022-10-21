@@ -1,10 +1,11 @@
 import logging
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import logout, login, authenticate
 
-from profiles.forms import RegisterForm, LoginForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+
+from profiles.forms import LoginForm, RegisterForm
 from profiles.services import create_user
 
 logger = logging.getLogger(__name__)

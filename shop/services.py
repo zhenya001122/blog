@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Sum, F, QuerySet
+from django.db.models import F, QuerySet, Sum
 from scrapy import signals
 from scrapy.crawler import CrawlerProcess
 from scrapy.signalmanager import dispatcher
@@ -36,8 +36,13 @@ def run_oma_spider(dry_run: bool = False):
     process.crawl(OmaSpider)
     process.start()
 
+
 def get_popular_products():
     queryset = Product.objects.annotate(
-        sold=Sum(F("cost") * F("purchases__count"), output_field=models.FloatField(), default=0)
+        sold=Sum(
+            F("cost") * F("purchases__count"),
+            output_field=models.FloatField(),
+            default=0,
+        )
     )
     return queryset.order_by("-sold")

@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z+t4o8h(c!rar$z#80d=&8)yakq%)8ww&u6_00e-leq09bj2c)'
+SECRET_KEY = "django-insecure-z+t4o8h(c!rar$z#80d=&8)yakq%)8ww&u6_00e-leq09bj2c)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DEBUG', True))
+DEBUG = bool(os.environ.get("DEBUG", True))
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost", "https://z71-blog1.herokuapp.com"]
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "posts",
     "profiles",
     "shop",
-    'hectar',
+    "hectar",
 ]
 
 MIDDLEWARE = [
@@ -98,9 +98,9 @@ DATABASES = {
 }
 
 # postgres://isgkzwrnmbovhd:7b2f5fcbc7e8d0eb43d6d46a5ef9d0f33ac0412d0e85bce1bb4e6e62160dbafa@ec2-63-32-248-14.eu-west-1.compute.amazonaws.com:5432/dc1s395lbmt7ms
+# postgres://froolvsmeatthh:4ed237676bcb131477a640a796fee3d7d5aa5ee33c654d381c8b973aea4a730c@ec2-34-252-216-149.eu-west-1.compute.amazonaws.com:5432/d298meoqutdlb8
 
-
-#https://docs.djangoproject.com/en/4.1/ref/settings/#caches
+# https://docs.djangoproject.com/en/4.1/ref/settings/#caches
 
 
 CACHES = {
@@ -109,7 +109,6 @@ CACHES = {
         "LOCATION": "unique-snowflake",
     }
 }
-
 
 
 # Password validation
@@ -189,21 +188,21 @@ LOGGING = {
 
 MY_ENV_VAR = os.environ.get("MY_ENV_VAR")
 
-AGE = os.environ.get('AGE')
-ALLOWED = os.environ.get('ALLOWED')
-DENIED = os.environ.get('DENIED')
+AGE = os.environ.get("AGE")
+ALLOWED = os.environ.get("ALLOWED")
+DENIED = os.environ.get("DENIED")
 
 # https://www.django-rest-framework.org/tutorial/quickstart/
 
 REST_FRAMEWORK = {
-   "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-   "DEFAULT_AUTHENTICATION_CLASSES": [
-       "rest_framework.authentication.BasicAuthentication",
-       "rest_framework.authentication.SessionAuthentication",
-   ],
-   "PAGE_SIZE": 10,
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "PAGE_SIZE": 10,
 }
-MY_ENV_VAR = os.environ.get('MY_ENV_VAR')
+MY_ENV_VAR = os.environ.get("MY_ENV_VAR")
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")

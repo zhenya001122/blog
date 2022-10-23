@@ -5,7 +5,6 @@ from telegram import Bot, Update
 from telegram.ext import ContextTypes
 
 from hectar.models import Message
-from shop.models import Product
 
 
 @sync_to_async

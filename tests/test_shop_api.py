@@ -2,7 +2,7 @@ import pytest
 from django.test.client import Client
 
 from shop.models import Purchase
-from tests.factories import PostFactory, ProductFactory, PurchaseFactory, UserFactory
+from tests.factories import ProductFactory, PurchaseFactory, UserFactory
 
 
 @pytest.mark.django_db
